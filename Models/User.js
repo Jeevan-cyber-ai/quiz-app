@@ -1,0 +1,45 @@
+const mongo=require('mongoose');
+
+const userSchema=new mongo.Schema({
+    name:{
+        type:String,
+        required:true
+    },
+    email:{
+        type:String,
+        required:true,
+        unique:true
+    },
+    
+    phone:{
+        type:String,
+        required:true,
+        unique:true
+
+    },
+    dept:{type:String,required:true},
+    year:{type:Number,required:true},
+   marks:{
+    type:Number,
+    default:0
+   },
+   q_attended:{
+    type:Number,
+    default:0
+   },
+   role:{
+    type:String,
+    enum:['student','admin'],
+    default:'student'
+   },
+   attempt:{
+    type:Number,default:0,min:0,max:1
+   },
+   eventId: {
+    type: mongo.Schema.Types.ObjectId,
+    ref: 'Events'}
+});
+
+const User=mongo.model('User',userSchema);
+
+module.exports=User;    
